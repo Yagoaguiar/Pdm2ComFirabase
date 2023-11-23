@@ -12,7 +12,7 @@ const Login = () => {
           Entrar
         </Button>
         <Button mode="contained" color="black" style={styles.Button}>
-          Criar Conta{" "}
+          Criar Conta
         </Button>
       </View>
     </View>
