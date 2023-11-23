@@ -1,4 +1,6 @@
+import Login from './screens/Login';
+
 const App = () => {
-    return <> </>;
+    return <Login />;
   }
   export default App;
