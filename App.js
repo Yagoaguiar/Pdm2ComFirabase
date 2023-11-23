@@ -1,6 +1,6 @@
-import Login from './screens/Login';
+import Register from './screens/Register';
 
 const App = () => {
-    return <Login />;
+    return <Register />;
   }
   export default App;
