@@ -1,5 +1,5 @@
 import { View, ScrollView, StyleSheet } from "react-native";
-import { Button, HelperText, Text, TextInput } from "react-native-paper";
+import { Button, Text, TextInput } from "react-native-paper";
 
 const Register = () => {
   return (
@@ -8,7 +8,7 @@ const Register = () => {
         <Text style={styles.title}>Cadastre-se</Text>
         <TextInput label="Nome" />
         <TextInput label="Email" />
-        <TextInput label="Senha" />
+        <TextInput label="Senha" secureTextEntry />
         <Button mode="contained" color="black" style={styles.Button}>Registrar</Button>
         <Button mode="contained" color="red" style={styles.Button}>
           Voltar
