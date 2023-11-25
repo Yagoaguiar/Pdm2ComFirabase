@@ -1,21 +1,20 @@
 import { View, ScrollView, StyleSheet } from "react-native";
-import { Button, HelperText, Text, TextInput } from "react-native-paper";
+import { Button, Text, TextInput } from "react-native-paper";
 
 const Login = () => {
+ 
   return (
-    <View style={styles.container}>
-      <View style={styles.secondView}>
-        <Text style={styles.title}>Login</Text>
-        <TextInput label="Email" />
-        <TextInput label="Senha" secureTextEntry />
-        <Button mode="contained" color="black" style={styles.Button}>
-          Entrar
-        </Button>
-        <Button mode="contained" color="black" style={styles.Button}>
-          Criar Conta
-        </Button>
+      <View style={styles.container}>
+        <View style={styles.secondView}>
+          <Text style={styles.title}>Login</Text>
+          <TextInput label="Email" />
+          <TextInput label="Senha" secureTextEntry />
+          <Button mode="contained">Entrar</Button>
+          <Button mode="contained" color="black" style={styles.Button}>
+            Criar Conta
+          </Button>
+        </View>
       </View>
-    </View>
   );
 };
 export default Login;
