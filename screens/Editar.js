@@ -1,17 +1,20 @@
-import { View, ScrollView, StyleSheet, Text } from "react-native";
-import { Appbar, HelperText, Button, TextInput } from "react-native-paper";
+import { useContext, useState } from 'react';
+import { View, ScrollView, StyleSheet} from "react-native";
+import { Appbar, HelperText, Button, TextInput, Text } from "react-native-paper";
+import ListaCompraProvider from '../contexts/ListaDeCompraContext';
+
 
 const EditarProduto = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.secondView}>
+      <ScrollView style={styles.secondView}>
         <Text style={styles.title}>Editar produto</Text>
         <TextInput label="Editar Produto" />
         <TextInput label="Quantidade" keyboardType={"numeric"} />
         <Button mode="contained" color="blue" style={styles.Button}>
           Adicionar
         </Button>
-      </View>
+      </ScrollView>
     </View>
   );
 };

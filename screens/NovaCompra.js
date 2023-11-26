@@ -1,26 +1,47 @@
-import { View, ScrollView, StyleSheet, Text } from "react-native";
-import { Appbar, HelperText, Button, TextInput } from "react-native-paper";
+import { useContext, useState } from 'react';
+import { View, ScrollView, StyleSheet} from "react-native";
+import { Appbar, HelperText, Button, TextInput, Text  } from "react-native-paper";
+import ListaCompraProvider, { ListaCompraContext } from '../contexts/ListaDeCompraContext';
+
 
 const NovaCompra = ({ navigation }) => {
+  const { adicionarItem } = useContext(ListaCompraContext);
+
+  const [produto, setProduto] = useState(''); // Estado para armazenar o produto
+  const [quantidade, setQuantidade] = useState(''); // Estado para armazenar a quantidade
+
+  const handleAdicionarItem = () => {
+    adicionarItem(produto, quantidade);
+    navigation.navigate('Home');
+  };
+
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.secondView}>
         <Text style={styles.title}>Adicionar novo produto</Text>
-        <TextInput label="Produto" />
-        <TextInput label="Quantidade" keyboardType={"numeric"} />
+        <TextInput
+          label="Produto"
+          value={produto}
+          onChangeText={(text) => setProduto(text)}
+        />
+        <TextInput
+          label="Quantidade"
+          keyboardType="numeric"
+          value={quantidade}
+          onChangeText={(text) => setQuantidade(text)}
+        />
         <Button
           mode="contained"
           color="blue"
           style={styles.Button}
-          onPress={() => navigation.navigate("Login")}
+          onPress={handleAdicionarItem} 
         >
           Adicionar
         </Button>
       </View>
-    </View>
+    </ScrollView>
   );
 };
-export default NovaCompra;
 
 const styles = StyleSheet.create({
   container: {
@@ -29,17 +50,19 @@ const styles = StyleSheet.create({
   },
   secondView: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   title: {
     fontSize: 22,
     padding: 8,
-    textAlign: "center",
+    textAlign: 'center',
   },
   label: {
-    color: "red",
+    color: 'red',
   },
   Button: {
     marginTop: 10,
   },
 });
+
+export default NovaCompra;
