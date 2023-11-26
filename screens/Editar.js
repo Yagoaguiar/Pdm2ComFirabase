@@ -1,7 +1,8 @@
 import { useContext, useState } from 'react';
 import { View, ScrollView, StyleSheet} from "react-native";
 import { Appbar, HelperText, Button, TextInput, Text } from "react-native-paper";
-import ListaCompraProvider from '../contexts/ListaDeCompraContext';
+import { ListaCompraContext } from '../contexts/ListaDeCompraContext'
+
 
 
 const EditarProduto = () => {

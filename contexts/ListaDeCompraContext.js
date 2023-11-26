@@ -3,34 +3,42 @@ import React, { createContext, useState } from 'react';
 const ListaCompraContext = createContext();
 
 const ListaCompraProvider = ({ children }) => {
-  const [listaCompras, setListaCompras] = useState([]);
-
+  const [itens, setItens] = useState([]);
   const adicionarItem = (produto, quantidade) => {
-    setListaCompras(prevLista => {
-      const novoItem = { produto, quantidade, concluido: false };
-      return [...prevLista, novoItem];
-    });
+    const novoItem = {
+      id: Math.random().toString(36).substring(7),
+      produto,
+      quantidade,
+      concluido: false,
+    };
+    setItens((prevItens) => [...prevItens, novoItem]);
   };
-
-  const marcarConcluido = (index) => {
-    const novaLista = [...listaCompras];
-    novaLista[index].concluido = true;
-    setListaCompras(novaLista);
+  
+  const editarItem = (id, novoProduto, novaQuantidade) => {
+    setItens((prevItens) =>
+      prevItens.map((item) =>
+        item.id === id ? { ...item, produto: novoProduto, quantidade: novaQuantidade } : item
+      )
+    );
   };
-
-  const excluirItem = (index) => {
-    const novaLista = listaCompras.filter((_, i) => i !== index);
-    setListaCompras(novaLista);
+  
+  const marcarConcluido = (id) => {
+    setItens((prevItens) =>
+      prevItens.map((item) =>
+        item.id === id ? { ...item, concluido: true } : item
+      )
+    );
+  };
+  
+  const excluirItem = (id) => {
+    setItens((prevItens) =>
+      prevItens.filter((item) => item.id !== id)
+    );
   };
 
   return (
     <ListaCompraContext.Provider
-      value={{
-        listaCompras,
-        adicionarItem,
-        marcarConcluido,
-        excluirItem,
-      }}
+      value={{ itens, adicionarItem, marcarConcluido, excluirItem, editarItem }}
     >
       {children}
     </ListaCompraContext.Provider>
@@ -39,3 +47,4 @@ const ListaCompraProvider = ({ children }) => {
 
 export default ListaCompraProvider;
 export { ListaCompraContext };
+

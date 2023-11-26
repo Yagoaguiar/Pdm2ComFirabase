@@ -5,13 +5,17 @@ import { FAB, List, IconButton } from "react-native-paper";
 import { ListaCompraContext } from '../contexts/ListaDeCompraContext';
 
 const Home = ({ navigation }) => {
-  const { listaCompras, excluirItem } = useContext(ListaCompraContext);
+  const { itens, adicionarItem, excluirItem } = useContext(ListaCompraContext);
+
+  const remover = (id) => {
+    excluirItem(id); // Chama a função excluirItem do contexto com o ID do item a ser removido
+  };
 
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.title}>Lista de Compras</Text>
-        {listaCompras.map((item, index) => (
+        {itens.map((item, index) => (
           <List.Item
             key={index}
             title={item.produto}
@@ -19,10 +23,9 @@ const Home = ({ navigation }) => {
             right={() => (
               <IconButton
                 icon="delete"
-                onPress={() => remover(excluirItem)} 
+                onPress={() => remover(item.id)}
               />
             )}
-            style={styles.item}
           />
         ))}
       </ScrollView>
