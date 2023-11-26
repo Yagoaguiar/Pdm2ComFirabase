@@ -5,7 +5,7 @@ import { FAB, List, IconButton } from "react-native-paper";
 import { ListaCompraContext } from '../contexts/ListaDeCompraContext';
 
 const Home = ({ navigation }) => {
-  const { listaCompras } = useContext(ListaCompraContext);
+  const { listaCompras, excluirItem } = useContext(ListaCompraContext);
 
   return (
     <View style={{ flex: 1 }}>
@@ -19,7 +19,7 @@ const Home = ({ navigation }) => {
             right={() => (
               <IconButton
                 icon="delete"
-                onPress={() => {}}
+                onPress={() => remover(excluirItem)} 
               />
             )}
             style={styles.item}
