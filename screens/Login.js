@@ -1,7 +1,7 @@
 import { View, ScrollView, StyleSheet } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 
-const Login = () => {
+const Login = ({ navigation }) => {
  
   return (
       <View style={styles.container}>
@@ -9,8 +9,12 @@ const Login = () => {
           <Text style={styles.title}>Login</Text>
           <TextInput label="Email" />
           <TextInput label="Senha" secureTextEntry />
-          <Button mode="contained">Entrar</Button>
-          <Button mode="contained" color="black" style={styles.Button}>
+          <Button mode="contained"
+          onPress={() => navigation.navigate('Home')}>
+            Entrar
+            </Button>
+          <Button mode="contained" color="black" style={styles.Button}
+          onPress={() => navigation.navigate('Register')}>
             Criar Conta
           </Button>
         </View>
