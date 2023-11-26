@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { View, StyleSheet, ScrollView, Text } from "react-native";
-import { FAB } from "react-native-paper";
+import { FAB, List, IconButton } from "react-native-paper";
 
 import { ListaCompraContext } from '../contexts/ListaDeCompraContext';
 
@@ -12,10 +12,18 @@ const Home = ({ navigation }) => {
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.title}>Lista de Compras</Text>
         {listaCompras.map((item, index) => (
-          <View key={index} style={styles.item}>
-            <Text>{item.produto}</Text>
-            <Text>Quantidade: {item.quantidade}</Text>
-          </View>
+          <List.Item
+            key={index}
+            title={item.produto}
+            description={`Quantidade: ${item.quantidade}`}
+            right={() => (
+              <IconButton
+                icon="delete"
+                onPress={() => {}}
+              />
+            )}
+            style={styles.item}
+          />
         ))}
       </ScrollView>
       <FAB
@@ -31,9 +39,24 @@ export default Home;
 
 const styles = StyleSheet.create({
   fab: {
-    position: "absolute",
+    position: 'absolute',
     right: 14,
     bottom: 32,
     margin: 16,
+  },
+  list: {
+    marginVertical: 10,
+    paddingHorizontal: 20,
+  },
+  item: {
+    borderBottomWidth: 1,
+    borderColor: '#ccc',
+    paddingVertical: 10,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 10,
   },
 });

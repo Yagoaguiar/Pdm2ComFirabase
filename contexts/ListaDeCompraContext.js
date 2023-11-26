@@ -11,12 +11,18 @@ const ListaCompraProvider = ({ children }) => {
       return [...prevLista, novoItem];
     });
   };
+  const excluirItem = (index) => {
+    const novaLista = listaCompras.filter((_, i) => i !== index);
+    setListaCompras(novaLista);
+  };
+  
 
   return (
     <ListaCompraContext.Provider
       value={{
         listaCompras,
         adicionarItem,
+        excluirItem,
       }}
     >
       {children}
