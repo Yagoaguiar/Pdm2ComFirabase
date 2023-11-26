@@ -1,6 +1,14 @@
-import React from "react";
 import MainNavigator from "./routes/MainNavigator";
-const App = () => {
-    return <MainNavigator />;
-  }
-  export default App;
+import ListaCompraProvider from "./contexts/ListaDeCompraContext";
+
+
+const App = () => (
+
+      <ListaCompraProvider>
+      <MainNavigator />
+      </ListaCompraProvider>
+
+
+);
+
+export default App;
