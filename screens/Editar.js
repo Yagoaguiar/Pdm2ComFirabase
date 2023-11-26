@@ -1,24 +1,21 @@
-import { View, ScrollView, StyleSheet, Text} from 'react-native';
-import { Appbar, HelperText, Button, TextInput } from 'react-native-paper';
+import { View, ScrollView, StyleSheet, Text } from "react-native";
+import { Appbar, HelperText, Button, TextInput } from "react-native-paper";
 
-
-const NovaCompra = () => {
-
+const EditarProduto = () => {
   return (
     <View style={styles.container}>
       <View style={styles.secondView}>
         <Text style={styles.title}>Editar produto</Text>
         <TextInput label="Editar Produto" />
-        <TextInput label="Quantidade" keyboardType={'numeric'} />
+        <TextInput label="Quantidade" keyboardType={"numeric"} />
         <Button mode="contained" color="blue" style={styles.Button}>
           Adicionar
         </Button>
       </View>
     </View>
-
   );
 };
-export default NovaCompra;
+export default EditarProduto;
 
 const styles = StyleSheet.create({
   container: {

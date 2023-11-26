@@ -1,10 +1,11 @@
 import { View, StyleSheet } from "react-native";
 import { FAB } from "react-native-paper";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
-      <FAB icon={"plus"} style={styles.fab} />
+      <FAB icon={"plus"} style={styles.fab} 
+      onPress={() => navigation.navigate('NovaCompra')}/>
     </View>
   );
 };
