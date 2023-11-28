@@ -1,39 +1,55 @@
-import { useContext, useState } from 'react';
-import { View, StyleSheet, ScrollView, Text } from "react-native";
-import { FAB } from "react-native-paper";
-
-import { ListaCompraContext } from '../contexts/ListaDeCompraContext';
+import React, { useContext } from "react";
+import { View, ScrollView, StyleSheet, Text } from "react-native";
+import { ListaCompraContext } from "../contexts/ListaDeCompraContext";
+import { List, IconButton, FAB } from "react-native-paper";
 
 const Home = ({ navigation }) => {
-  const { listaCompras } = useContext(ListaCompraContext);
+  const { itens, excluirItem } = useContext(ListaCompraContext);
+
+  const remover = (id) => {
+    excluirItem(id);
+    
+  };
 
   return (
-    <View style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.ScrollView}>
         <Text style={styles.title}>Lista de Compras</Text>
-        {listaCompras.map((item, index) => (
-          <View key={index} style={styles.item}>
-            <Text>{item.produto}</Text>
-            <Text>Quantidade: {item.quantidade}</Text>
-          </View>
+        {itens.map((item, index) => (
+          <List.Item
+            key={index}
+            title={item.produto}
+            description={`Quantidade: ${item.quantidade}`}
+            onPress={() =>
+              navigation.navigate("EditarProduto", { itemId: item.id })
+            }
+            right={() => (
+              <IconButton icon="delete" onPress={() => remover(item.id)} />
+            )}
+          />
         ))}
+        <FAB
+          icon="plus"
+          onPress={() => navigation.navigate("NovaCompra")}
+        />
       </ScrollView>
-      <FAB
-        icon="plus"
-        style={styles.fab}
-        onPress={() => navigation.navigate('NovaCompra')}
-      />
     </View>
   );
 };
 
-export default Home;
-
 const styles = StyleSheet.create({
-  fab: {
-    position: "absolute",
-    right: 14,
-    bottom: 32,
-    margin: 16,
+  container: {
+    flex: 1,
+  },
+  scrollView: {
+    flexGrow: 1,
+    paddingVertical: 20,
+  },
+  title: {
+    fontSize: 22,
+    textAlign: "center",
+    marginBottom: 20,
   },
 });
+
+export default Home;
