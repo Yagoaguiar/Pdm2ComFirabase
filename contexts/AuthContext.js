@@ -16,15 +16,15 @@ const AuthProvider = ({ children }) => {
             return;
         }
 
-        // Validar formato de e-mail usando uma expressão regular
+
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             setError(emailMessage);
             return;
         }
 
-        // const isPasswordValid = senha === user.senha; // FAZ A VALIDAÇÃO SE A SENHA É A MESMA DO CADASTRO
-        // const isEmailValid = email === user.email; // FAZ A VALIDAÇÃO SE O EMAIL E O MESMO DO CADASTRO
+       
+       
 
         setUser(prevUser => ({
             ...prevUser,
