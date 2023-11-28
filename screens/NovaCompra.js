@@ -1,18 +1,35 @@
-import { useContext, useState } from 'react';
-import { View, ScrollView, StyleSheet} from "react-native";
-import { Appbar, HelperText, Button, TextInput, Text  } from "react-native-paper";
-import ListaCompraProvider, { ListaCompraContext } from '../contexts/ListaDeCompraContext';
-
+import React, { useContext, useState } from 'react';
+import { View, ScrollView, StyleSheet, Text } from "react-native";
+import { Appbar, HelperText, Button, TextInput } from "react-native-paper";
+import { useForm } from 'react-hook-form';
+import { ListaCompraContext } from '../contexts/ListaDeCompraContext';
 
 const NovaCompra = ({ navigation }) => {
   const { adicionarItem } = useContext(ListaCompraContext);
 
-  const [produto, setProduto] = useState(''); // Estado para armazenar o produto
-  const [quantidade, setQuantidade] = useState(''); // Estado para armazenar a quantidade
+  const { control, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
+      novoProduto: '',
+      novaQuantidade: '',
+    },
+  });
+
+  const [produto, setProduto] = useState('');
+  const [quantidade, setQuantidade] = useState('');
 
   const handleAdicionarItem = () => {
     adicionarItem(produto, quantidade);
     navigation.navigate('Home');
+  };
+
+  const produtoRole = {
+    required: { value: true, message: "Produto é obrigatório" },
+    minLength: { value: 1, message: "Produto deve ter pelo menos 1 letra" },
+  };
+
+  const quantidadeRole = {
+    required: { value: true, message: 'Quantidade é obrigatória' },
+    min: { value: 1, message: 'A quantidade deve ser maior que 0' },
   };
 
   return (
@@ -23,18 +40,26 @@ const NovaCompra = ({ navigation }) => {
           label="Produto"
           value={produto}
           onChangeText={(text) => setProduto(text)}
+          error={errors.novoProduto ? true : false}
         />
+        {errors.novoProduto && (
+          <HelperText type="error">{errors.novoProduto.message}</HelperText>
+        )}
         <TextInput
           label="Quantidade"
           keyboardType="numeric"
           value={quantidade}
           onChangeText={(text) => setQuantidade(text)}
+          error={errors.novaQuantidade ? true : false}
         />
+        {errors.novaQuantidade && (
+          <HelperText type="error">{errors.novaQuantidade.message}</HelperText>
+        )}
         <Button
           mode="contained"
           color="blue"
           style={styles.Button}
-          onPress={handleAdicionarItem} 
+          onPress={handleSubmit(handleAdicionarItem)}
         >
           Adicionar
         </Button>
@@ -56,9 +81,6 @@ const styles = StyleSheet.create({
     fontSize: 22,
     padding: 8,
     textAlign: 'center',
-  },
-  label: {
-    color: 'red',
   },
   Button: {
     marginTop: 10,

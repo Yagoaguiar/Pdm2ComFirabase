@@ -1,9 +1,11 @@
+
 import React, { createContext, useState } from 'react';
 
 const ListaCompraContext = createContext();
 
 const ListaCompraProvider = ({ children }) => {
   const [itens, setItens] = useState([]);
+
   const adicionarItem = (produto, quantidade) => {
     const novoItem = {
       id: Math.random().toString(36).substring(7),
@@ -35,11 +37,22 @@ const ListaCompraProvider = ({ children }) => {
       prevItens.filter((item) => item.id !== id)
     );
   };
+  
+  const buscar = (id) => {
+    return itens.find((item) => item.id === id);
+  };
+
+  const contextValue = {
+    itens,
+    adicionarItem,
+    editarItem,
+    marcarConcluido,
+    excluirItem,
+    buscar,
+  };
 
   return (
-    <ListaCompraContext.Provider
-      value={{ itens, adicionarItem, marcarConcluido, excluirItem, editarItem }}
-    >
+    <ListaCompraContext.Provider value={contextValue}>
       {children}
     </ListaCompraContext.Provider>
   );
@@ -47,4 +60,3 @@ const ListaCompraProvider = ({ children }) => {
 
 export default ListaCompraProvider;
 export { ListaCompraContext };
-

@@ -1,44 +1,90 @@
-import { useContext, useState } from 'react';
-import { View, ScrollView, StyleSheet} from "react-native";
-import { Appbar, HelperText, Button, TextInput, Text } from "react-native-paper";
-import { ListaCompraContext } from '../contexts/ListaDeCompraContext'
+// EditarProduto.js
 
+import React, { useContext } from "react";
+import { View, StyleSheet } from "react-native";
+import { Appbar, Button, TextInput, Text } from "react-native-paper";
+import { ListaCompraContext } from "../contexts/ListaDeCompraContext";
+import { useForm, Controller } from "react-hook-form";
 
+const EditarProduto = ({ route, navigation }) => {
+  const { itemId } = route.params;
+  const { buscar, editarItem } = useContext(ListaCompraContext);
+  const itemSelecionado = buscar(itemId);
 
-const EditarProduto = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      novoProduto: itemSelecionado ? itemSelecionado.produto : '',
+      novaQuantidade: itemSelecionado ? itemSelecionado.quantidade.toString() : '',
+    },
+  });
+
+  const onSubmit = (data) => {
+    const { novoProduto, novaQuantidade } = data;
+    editarItem(itemId, novoProduto, novaQuantidade);
+    navigation.pop();
+  };
+
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.secondView}>
-        <Text style={styles.title}>Editar produto</Text>
-        <TextInput label="Editar Produto" />
-        <TextInput label="Quantidade" keyboardType={"numeric"} />
-        <Button mode="contained" color="blue" style={styles.Button}>
-          Adicionar
+      <Appbar.Header>
+        <Appbar.BackAction onPress={() => navigation.pop()} />
+        <Appbar.Content title="Editar Produto" />
+      </Appbar.Header>
+      <View style={styles.content}>
+        <Controller
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <TextInput
+              label="Editar Produto"
+              value={value}
+              onChangeText={(text) => onChange(text)}
+            />
+          )}
+          name="novoProduto"
+          rules={{ required: true, minLength: 1 }}
+          defaultValue="" // Valor padrão para o campo
+        />
+        <Controller
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <TextInput
+              label="Quantidade"
+              keyboardType="numeric"
+              value={value}
+              onChangeText={(text) => onChange(text)}
+            />
+          )}
+          name="novaQuantidade"
+          rules={{ required: true, min: 1 }}
+          defaultValue=""
+        />
+        <Button
+          mode="contained"
+          style={styles.button}
+          onPress={handleSubmit(onSubmit)}
+        >
+          Editar
         </Button>
-      </ScrollView>
+      </View>
     </View>
   );
 };
-export default EditarProduto;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  content: {
+    flex: 1,
     padding: 16,
   },
-  secondView: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 22,
-    padding: 8,
-    textAlign: "center",
-  },
-  label: {
-    color: "red",
-  },
-  Button: {
-    marginTop: 10,
+  button: {
+    marginTop: 16,
   },
 });
+
+export default EditarProduto;
