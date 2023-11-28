@@ -1,8 +1,7 @@
-// EditarProduto.js
 
 import React, { useContext } from "react";
 import { View, StyleSheet } from "react-native";
-import { Appbar, Button, TextInput, Text } from "react-native-paper";
+import { Appbar, Button, TextInput, Text, FAB, HelperText } from "react-native-paper";
 import { ListaCompraContext } from "../contexts/ListaDeCompraContext";
 import { useForm, Controller } from "react-hook-form";
 
@@ -22,6 +21,19 @@ const EditarProduto = ({ route, navigation }) => {
     },
   });
 
+  const produtoRole = {
+    required: { value: true, message: 'Produto é obrigatório' },
+    minLength: { value: 2, message: 'Produto deve ter pelo menos 2 letras' },
+    pattern: {
+      value: /^[A-Za-zÀ-ú\s]+$/, 
+      message: 'Por favor, insira apenas letras no campo Produto',
+    },
+  };
+  const quantidadeRole = {
+    required: { value: true, message: 'Quantidade é obrigatória' },
+    min: { value: 1, message: 'A quantidade deve ser maior que 0' },
+  };
+
   const onSubmit = (data) => {
     const { novoProduto, novaQuantidade } = data;
     editarItem(itemId, novoProduto, novaQuantidade);
@@ -38,28 +50,42 @@ const EditarProduto = ({ route, navigation }) => {
         <Controller
           control={control}
           render={({ field: { onChange, value } }) => (
-            <TextInput
-              label="Editar Produto"
-              value={value}
-              onChangeText={(text) => onChange(text)}
-            />
+            <>
+              <TextInput
+                label="Editar Produto"
+                value={value}
+                onChangeText={(text) => onChange(text)}
+              />
+              {errors.novoProduto && (
+                <HelperText type="error" visible={true}>
+                  {errors.novoProduto.message}
+                </HelperText>
+              )}
+            </>
           )}
           name="novoProduto"
-          rules={{ required: true, minLength: 1 }}
-          defaultValue="" // Valor padrão para o campo
+          rules={produtoRole}
+          defaultValue=""
         />
         <Controller
           control={control}
           render={({ field: { onChange, value } }) => (
-            <TextInput
-              label="Quantidade"
-              keyboardType="numeric"
-              value={value}
-              onChangeText={(text) => onChange(text)}
-            />
+            <>
+              <TextInput
+                label="Quantidade"
+                keyboardType="numeric"
+                value={value}
+                onChangeText={(text) => onChange(text)}
+              />
+              {errors.novaQuantidade && (
+                <HelperText type="error" visible={true}>
+                  {errors.novaQuantidade.message}
+                </HelperText>
+              )}
+            </>
           )}
           name="novaQuantidade"
-          rules={{ required: true, min: 1 }}
+          rules={quantidadeRole}
           defaultValue=""
         />
         <Button
