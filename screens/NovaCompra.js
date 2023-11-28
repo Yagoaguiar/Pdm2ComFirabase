@@ -1,35 +1,50 @@
-import React, { useContext } from 'react';
-import { View, ScrollView, StyleSheet, Text } from 'react-native';
-import { Appbar, HelperText, Button, TextInput } from 'react-native-paper';
-import { useForm, Controller } from 'react-hook-form';
-import { ListaCompraContext } from '../contexts/ListaDeCompraContext';
+import { useContext, React } from "react";
+import { View, ScrollView, StyleSheet, Text } from "react-native";
+import {
+  Appbar,
+  HelperText,
+  Button,
+  TextInput,
+  useTheme,
+} from "react-native-paper";
+import { useForm, Controller } from "react-hook-form";
+import { ListaCompraContext } from "../contexts/ListaDeCompraContext";
 
 const NovaCompra = ({ navigation }) => {
   const { adicionarItem } = useContext(ListaCompraContext);
 
-  const { control, handleSubmit, formState: { errors } } = useForm();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const { Colors } = useTheme();
 
   const produtoRole = {
-    required: { value: true, message: 'Produto é obrigatório' },
-    minLength: { value: 2, message: 'Produto deve ter pelo menos 2 letras' },
+    required: { value: true, message: "Produto é obrigatório" },
+    minLength: { value: 2, message: "Produto deve ter pelo menos 2 letras" },
     pattern: {
-      value: /^[A-Za-zÀ-ú\s]+$/, 
-      message: 'Por favor, insira apenas letras no campo Produto',
+      value: /^[A-Za-zÀ-ú\s]+$/,
+      message: "Por favor, insira apenas letras no campo Produto",
     },
   };
   const quantidadeRole = {
-    required: { value: true, message: 'Quantidade é obrigatória' },
-    min: { value: 1, message: 'A quantidade deve ser maior que 0' },
+    required: { value: true, message: "Quantidade é obrigatória" },
+    min: { value: 1, message: "A quantidade deve ser maior que 0" },
   };
 
   const onSubmit = (data) => {
     adicionarItem(data.novoProduto, data.novaQuantidade);
-    navigation.navigate('Home');
+    navigation.navigate("Home");
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.secondView}>
+    <ScrollView>
+      <Appbar.Header>
+        <Appbar.BackAction onPress={() => navigation.navigate("Home")} />
+        <Appbar.Content />
+      </Appbar.Header>
+      <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.title}>Adicionar novo produto</Text>
         <Controller
           control={control}
@@ -43,7 +58,9 @@ const NovaCompra = ({ navigation }) => {
                 onChangeText={(text) => onChange(text)}
               />
               {errors.novoProduto && (
-                <HelperText type="error">{errors.novoProduto.message}</HelperText>
+                <HelperText type="error">
+                  {errors.novoProduto.message}
+                </HelperText>
               )}
             </View>
           )}
@@ -63,22 +80,19 @@ const NovaCompra = ({ navigation }) => {
                 onChangeText={(text) => onChange(text)}
               />
               {errors.novaQuantidade && (
-                <HelperText type="error">{errors.novaQuantidade.message}</HelperText>
+                <HelperText type="error">
+                  {errors.novaQuantidade.message}
+                </HelperText>
               )}
             </View>
           )}
           name="novaQuantidade"
           defaultValue=""
         />
-        <Button
-          mode="contained"
-          color="blue"
-          style={styles.Button}
-          onPress={handleSubmit(onSubmit)}
-        >
+        <Button mode="contained" onPress={handleSubmit(onSubmit)}>
           Adicionar
         </Button>
-      </View>
+      </ScrollView>
     </ScrollView>
   );
 };
@@ -86,19 +100,13 @@ const NovaCompra = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
     padding: 16,
-  },
-  secondView: {
-    flex: 1,
-    justifyContent: 'center',
   },
   title: {
     fontSize: 22,
     padding: 8,
-    textAlign: 'center',
-  },
-  Button: {
-    marginTop: 10,
+    textAlign: "center",
   },
 });
 

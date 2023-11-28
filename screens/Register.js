@@ -4,6 +4,7 @@ import { Button, Text, TextInput } from "react-native-paper";
 import ListaCompraProvider from '../contexts/ListaDeCompraContext';
 
 const Register = ({ navigation }) => {
+
   return (
     <View style={styles.container}>
       <View style={styles.secondView}>

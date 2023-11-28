@@ -1,7 +1,7 @@
 
-import React, { useContext } from "react";
+import { useContext, React } from "react";
 import { View, StyleSheet } from "react-native";
-import { Appbar, Button, TextInput, Text, FAB, HelperText } from "react-native-paper";
+import { Appbar, Button, TextInput, Text, FAB, HelperText, useTheme } from "react-native-paper";
 import { ListaCompraContext } from "../contexts/ListaDeCompraContext";
 import { useForm, Controller } from "react-hook-form";
 
@@ -9,6 +9,8 @@ const EditarProduto = ({ route, navigation }) => {
   const { itemId } = route.params;
   const { buscar, editarItem } = useContext(ListaCompraContext);
   const itemSelecionado = buscar(itemId);
+  const { Colors } = useTheme();
+
 
   const {
     control,
