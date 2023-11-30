@@ -11,6 +11,7 @@ const ListaCompraProvider = ({ children }) => {
       id: Math.random().toString(36).substring(7),
       produto,
       quantidade,
+      tipo: 'mercado',
       concluido: false,
     };
     setItens((prevItens) => [...prevItens, novoItem]);
@@ -27,7 +28,7 @@ const ListaCompraProvider = ({ children }) => {
   const marcarConcluido = (id) => {
     setItens((prevItens) =>
       prevItens.map((item) =>
-        item.id === id ? { ...item, concluido: true } : item
+        item.id === id ? { ...item, concluido: !item.concluido } : item
       )
     );
   };
@@ -42,6 +43,9 @@ const ListaCompraProvider = ({ children }) => {
     return itens.find((item) => item.id === id);
   };
 
+  const itensDoMercado = itens.filter(item => item.tipo === 'mercado');
+  const itensDaFeira = itens.filter(item => item.tipo === 'feira')
+  const itensOutros = itens.filter(item => item.tipo === 'outros') 
   const contextValue = {
     itens,
     adicionarItem,
@@ -49,6 +53,9 @@ const ListaCompraProvider = ({ children }) => {
     marcarConcluido,
     excluirItem,
     buscar,
+    itensDoMercado,
+    itensDaFeira,
+    itensOutros
   };
 
   return (

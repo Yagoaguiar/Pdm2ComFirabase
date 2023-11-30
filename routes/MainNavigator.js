@@ -9,6 +9,8 @@ import Login from "../screens/Login";
 import NovaCompra from "../screens/NovaCompra";
 import Register from "../screens/Register";
 import NovaHome from "../screens/NovaHome";
+import Mercado from "../screens/Mercado";
+import AdicionarMercado from "../screens/AdicionarMercado";
 
 import { AuthContext } from "../contexts/AuthContext";
 
@@ -43,10 +45,14 @@ const MainNavigator = () => {
                 component={NovaHome}
                 options={{ headerShown: false }}
               />
-
               <Stack.Screen
-                name="Home"
-                component={Home}
+                name="Mercado"
+                component={Mercado}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="AdicionarMercado"
+                component={AdicionarMercado}
                 options={{ headerShown: false }}
               />
               <Stack.Screen

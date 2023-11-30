@@ -21,6 +21,7 @@ const Home = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <Appbar.Header>
+      <Appbar.Action  onPress={() => navigation.navigate("NovaHome")} />
         <Appbar.Content title="Compras" />
       </Appbar.Header>
       <ScrollView contentContainerStyle={styles.ScrollView}>

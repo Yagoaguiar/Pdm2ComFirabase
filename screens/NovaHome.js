@@ -8,7 +8,7 @@ const NovaHome  = ({ navigation}) => (
     <List.Subheader>Lista de Compra</List.Subheader>
     <List.Item
       title="Mercado"
-      onPress={() => navigation.navigate("Home")}
+      onPress={() => navigation.navigate("Mercado")}
       left={() => <List.Icon icon="folder" />}
     />
     <List.Item
