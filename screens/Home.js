@@ -21,7 +21,9 @@ const Home = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <Appbar.Header>
-        <Appbar.Content title="Sua Lista de compras" />
+      <Appbar.Action  onPress={() => navigation.navigate("NovaHome")} />
+      <Appbar.Content title="Compras" subtitle={`Olá, ${user.name}`} />
+        <Appbar.Content title="Compras" />
       </Appbar.Header>
       <ScrollView contentContainerStyle={styles.ScrollView}>
         {itens.map((item, index) => (

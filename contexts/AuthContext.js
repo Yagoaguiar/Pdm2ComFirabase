@@ -16,15 +16,11 @@ const AuthProvider = ({ children }) => {
             return;
         }
 
-
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             setError(emailMessage);
             return;
         }
-
-       
-       
 
         setUser(prevUser => ({
             ...prevUser,
