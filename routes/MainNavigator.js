@@ -13,6 +13,9 @@ import Mercado from "../screens/Mercado";
 import AdicionarMercado from "../screens/AdicionarMercado";
 import AdicionarFeira from "../screens/AdicionarFeira";
 import Feira from "../screens/Feira";
+import AdicionarOutros from "../screens/AdicionarOutros";
+import Outros from "../screens/Outros";
+
 
 import { AuthContext } from "../contexts/AuthContext";
 
@@ -75,6 +78,16 @@ const MainNavigator = () => {
               <Stack.Screen
                 name="Feira"
                 component={Feira}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Outros"
+                component={Outros}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="AdicionarOutros"
+                component={AdicionarOutros}
                 options={{ headerShown: false }}
               />
             </>

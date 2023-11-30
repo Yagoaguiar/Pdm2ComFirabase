@@ -22,6 +22,7 @@ const Home = ({ navigation }) => {
     <View style={{ flex: 1 }}>
       <Appbar.Header>
       <Appbar.Action  onPress={() => navigation.navigate("NovaHome")} />
+      <Appbar.Content title="Compras" subtitle={`Olá, ${user.name}`} />
         <Appbar.Content title="Compras" />
       </Appbar.Header>
       <ScrollView contentContainerStyle={styles.ScrollView}>

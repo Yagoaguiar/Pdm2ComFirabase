@@ -5,6 +5,7 @@ const ListaCompraContext = createContext();
 
 const ListaCompraProvider = ({ children }) => {
   const [itens, setItens] = useState([]);
+  
 
   const adicionarItem = (produto, quantidade, tipo) => {
     const novoItem = {
