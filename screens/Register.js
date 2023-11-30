@@ -14,7 +14,6 @@ const Register = ({ navigation }) => {
         <TextInput label="Senha" secureTextEntry />
         <Button
           mode="contained"
-          color="black"
           style={styles.Button}
           onPress={() => navigation.navigate("Home")}
         >
@@ -22,7 +21,6 @@ const Register = ({ navigation }) => {
         </Button>
         <Button
           mode="contained"
-          color="red"
           style={styles.Button}
           onPress={() => navigation.navigate("Login")}
         >
@@ -47,9 +45,6 @@ const styles = StyleSheet.create({
     fontSize: 22,
     padding: 8,
     textAlign: "center",
-  },
-  label: {
-    color: "red",
   },
   Button: {
     marginTop: 10,

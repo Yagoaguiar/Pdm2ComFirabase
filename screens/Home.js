@@ -21,7 +21,7 @@ const Home = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <Appbar.Header>
-        <Appbar.Content title="Sua Lista de compras" />
+        <Appbar.Content title="Compras" />
       </Appbar.Header>
       <ScrollView contentContainerStyle={styles.ScrollView}>
         {itens.map((item, index) => (

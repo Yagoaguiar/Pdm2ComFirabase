@@ -35,7 +35,7 @@ const Login = ({ navigation }) => {
           Entrar
         </Button>
 
-        <Button mode="contained" color="black" style={styles.Button}
+        <Button mode="contained" style={styles.Button}
           onPress={() => navigation.navigate('Register')}>
           Criar Conta
         </Button>
