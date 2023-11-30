@@ -13,7 +13,7 @@ const NovaHome  = ({ navigation}) => (
     />
     <List.Item
       title="Feira"
-      onPress={() => navigation.navigate("Home")}
+      onPress={() => navigation.navigate("Feira")}
       left={() => <List.Icon icon="folder" />}
     />
     <List.Item

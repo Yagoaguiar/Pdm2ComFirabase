@@ -11,6 +11,8 @@ import Register from "../screens/Register";
 import NovaHome from "../screens/NovaHome";
 import Mercado from "../screens/Mercado";
 import AdicionarMercado from "../screens/AdicionarMercado";
+import AdicionarFeira from "../screens/AdicionarFeira";
+import Feira from "../screens/Feira";
 
 import { AuthContext } from "../contexts/AuthContext";
 
@@ -63,6 +65,16 @@ const MainNavigator = () => {
               <Stack.Screen
                 name="NovaCompra"
                 component={NovaCompra}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="AdicionarFeira"
+                component={AdicionarFeira}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Feira"
+                component={Feira}
                 options={{ headerShown: false }}
               />
             </>
