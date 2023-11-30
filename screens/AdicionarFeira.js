@@ -37,6 +37,7 @@ const AdicionarFeira = ({ navigation }) => {
   return (
     <ScrollView>
       <Appbar.Header>
+      <Appbar.BackAction onPress={() => navigation.navigate("NovaHome")} />
         <Appbar.Content title="Adicionar Produto na Feira" />
       </Appbar.Header>
       <ScrollView contentContainerStyle={styles.container}>

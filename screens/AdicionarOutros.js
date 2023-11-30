@@ -30,13 +30,14 @@ const AdicionarOutros = ({ navigation }) => {
   };
 
   const onSubmit = (data) => {
-    adicionarItem(data.novoProduto, data.novaQuantidade, 'outros');
+    adicionarItem(data.novoProduto, data.novaQuantidade, "outros");
     navigation.goBack();
   };
 
   return (
     <ScrollView>
       <Appbar.Header>
+        <Appbar.BackAction onPress={() => navigation.navigate("NovaHome")} />
         <Appbar.Content title="Adicionar Produto em Outros" />
       </Appbar.Header>
       <ScrollView contentContainerStyle={styles.container}>
