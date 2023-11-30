@@ -23,12 +23,11 @@ const AdicionarMercado = ({ navigation }) => {
   const produtoRole = {
     required: { value: true, message: "Produto é obrigatório" },
     minLength: { value: 2, message: "Produto deve ter pelo menos 2 letras" },
-    // ... outras regras de validação, se necessário
+
   };
   const quantidadeRole = {
     required: { value: true, message: "Quantidade é obrigatória" },
     min: { value: 1, message: "A quantidade deve ser maior que 0" },
-    // ... outras regras de validação, se necessário
   };
 
   const onSubmit = (data) => {
