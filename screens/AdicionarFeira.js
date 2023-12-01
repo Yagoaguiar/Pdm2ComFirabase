@@ -12,13 +12,13 @@ import { ListaCompraContext } from "../contexts/ListaDeCompraContext";
 
 const AdicionarFeira = ({ navigation }) => {
   const { adicionarItem } = useContext(ListaCompraContext);
+  const theme = useTheme();
 
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { colors } = useTheme();
 
   const produtoRole = {
     required: { value: true, message: "Produto é obrigatório" },
@@ -37,7 +37,8 @@ const AdicionarFeira = ({ navigation }) => {
   return (
     <ScrollView>
       <Appbar.Header>
-        <Appbar.Content title="Adicionar Produto na Feira" />
+      <Appbar.BackAction color={theme.colors.accent} onPress={() => navigation.navigate("NovaHome")} />
+        <Appbar.Content color={theme.colors.accent} title="Adicionar Produto na Feira" />
       </Appbar.Header>
       <ScrollView contentContainerStyle={styles.container}>
         <Controller
@@ -97,6 +98,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 16,
   },
+  
 });
 
 export default AdicionarFeira;

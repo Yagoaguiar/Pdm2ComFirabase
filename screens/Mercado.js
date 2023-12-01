@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
-import { Appbar, List, IconButton, Checkbox } from "react-native-paper";
+import { Appbar, List, IconButton, Checkbox, useTheme } from "react-native-paper";
 import { ListaCompraContext } from "../contexts/ListaDeCompraContext";
 
 const Mercado = ({ navigation }) => {
   const { itensDoMercado, excluirItem, marcarConcluido } = useContext(ListaCompraContext);
-
+  const theme = useTheme();
   const remover = (id) => {
     excluirItem(id);
   };
@@ -17,8 +17,8 @@ const Mercado = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <Appbar.Header>
-        <Appbar.Action icon="arrow-left" onPress={() => navigation.navigate("NovaHome")} />
-        <Appbar.Content title="Lista de Mercado" />
+        <Appbar.Action icon="arrow-left" color={theme.colors.accent} onPress={() => navigation.navigate("NovaHome")} />
+        <Appbar.Content title="Lista de Mercado" color={theme.colors.accent}/>
       </Appbar.Header>
       <ScrollView contentContainerStyle={styles.container}>
         {itensDoMercado.map((item) => (
@@ -29,6 +29,8 @@ const Mercado = ({ navigation }) => {
             right={() => (
               <View style={styles.buttonsContainer}>
                 <Checkbox
+                  uncheckedColor="black" 
+                  color="#04ff30"
                   status={item.concluido ? 'checked' : 'unchecked'}
                   onPress={() => handleCheckboxToggle(item.id, item.concluido)}
                 />
@@ -45,7 +47,8 @@ const Mercado = ({ navigation }) => {
         ))}
         <IconButton
           icon="plus"
-          style={styles.btnFab}
+          style={[styles.btnFab, { backgroundColor: theme.colors.secondary }]}
+          color={theme.colors.accent}
           onPress={() => navigation.navigate("AdicionarMercado")}
         />
       </ScrollView>
@@ -63,8 +66,8 @@ const styles = StyleSheet.create({
   },
   btnFab: {
     position: "absolute",
-    right: 0,
-    bottom: 0,
+    right: 15,
+    bottom: 20,
     margin: 16,
   },
   listItem: {

@@ -29,6 +29,7 @@ const Login = ({ navigation }) => {
           }} />
 
         <Button mode="contained"
+          style={styles.Button}
           onPress={() => {
             login(email, senha);
           }}>
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
     color: "red",
   },
   Button: {
-    marginTop: 10,
+    marginTop: 15,
   },
   error: {
     textAlign: 'center',

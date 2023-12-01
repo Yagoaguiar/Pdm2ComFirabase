@@ -24,10 +24,14 @@ const theme = {
   roundness: 2,
   colors: {
     ...DefaultTheme.colors,
-    backgroud: "#000E00",
-    primary: "#000000",
-    accent: "#0C51DD",
+    backgroud: "#c90076",
+    primary: "#FE9D1F", // principal 
+    secondary: "#18d2ea", //azul, pastas e botões
+    onBackground: "#f3f32",
+    accent: "#ffff",
     danger: "#FA3415",
+    tertiary: "#04ff30",
+    unchecked: "#00000"
   },
 };
 
@@ -41,7 +45,7 @@ const MainNavigator = () => {
           {!user.logado ? (
             <>
               <Stack.Screen name="Login" component={Login} />
-              <Stack.Screen name="Register" component={Register} />
+              <Stack.Screen name="Register" component={Register} options={{ title: 'Cadastre-se' }}/>
             </>
           ) : (
             <>

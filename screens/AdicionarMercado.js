@@ -23,7 +23,6 @@ const AdicionarMercado = ({ navigation }) => {
   const produtoRole = {
     required: { value: true, message: "Produto é obrigatório" },
     minLength: { value: 2, message: "Produto deve ter pelo menos 2 letras" },
-
   };
   const quantidadeRole = {
     required: { value: true, message: "Quantidade é obrigatória" },
@@ -31,14 +30,15 @@ const AdicionarMercado = ({ navigation }) => {
   };
 
   const onSubmit = (data) => {
-    adicionarItem(data.novoProduto, data.novaQuantidade, 'mercado'); 
-    navigation.goBack(); 
+    adicionarItem(data.novoProduto, data.novaQuantidade, "mercado");
+    navigation.goBack();
   };
 
   return (
     <ScrollView>
       <Appbar.Header>
-        <Appbar.Content title="Adicionar Produto no Mercado" />
+        <Appbar.BackAction color={colors.accent} onPress={() => navigation.navigate("NovaHome")} />
+        <Appbar.Content color={colors.accent} title="Adicionar Produto no Mercado" />
       </Appbar.Header>
       <ScrollView contentContainerStyle={styles.container}>
         <Controller

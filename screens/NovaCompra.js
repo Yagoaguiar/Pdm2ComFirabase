@@ -41,7 +41,7 @@ const NovaCompra = ({ navigation }) => {
   return (
     <ScrollView>
       <Appbar.Header>
-        <Appbar.BackAction onPress={() => navigation.navigate("Home")} />
+        <Appbar.BackAction color={Colors.accent} onPress={() => navigation.navigate("Home")} />
         <Appbar.Content />
       </Appbar.Header>
       <ScrollView contentContainerStyle={styles.container}>
@@ -107,6 +107,12 @@ const styles = StyleSheet.create({
     fontSize: 22,
     padding: 8,
     textAlign: "center",
+  },
+  addBtn: {
+    position: "absolute",
+    right: 0,
+    bottom: 0,
+    margin: 16,
   },
 });
 

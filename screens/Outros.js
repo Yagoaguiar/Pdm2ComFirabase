@@ -5,11 +5,13 @@ import {
   List,
   IconButton,
   Checkbox,
+  useTheme
 } from "react-native-paper";
 import { ListaCompraContext } from "../contexts/ListaDeCompraContext";
 
 const Outros = ({ navigation }) => {
   const { itensOutros, excluirItem, marcarConcluido } = useContext(ListaCompraContext);
+  const theme = useTheme();
 
   const remover = (id) => {
     excluirItem(id);
@@ -19,11 +21,12 @@ const Outros = ({ navigation }) => {
     marcarConcluido(id, !concluido);
   };
 
+
   return (
     <View style={{ flex: 1 }}>
       <Appbar.Header>
-        <Appbar.Action icon="arrow-left" onPress={() => navigation.navigate("NovaHome")} />
-        <Appbar.Content title="Lista de Outros" />
+        <Appbar.Action color={theme.colors.accent} icon="arrow-left" onPress={() => navigation.navigate("NovaHome")} />
+        <Appbar.Content color={theme.colors.accent} title="Lista de Outros" />
       </Appbar.Header>
       <ScrollView contentContainerStyle={styles.container}>
         {itensOutros.map((item) => (
@@ -34,6 +37,8 @@ const Outros = ({ navigation }) => {
             right={() => (
               <View style={styles.buttonsContainer}>
                 <Checkbox
+                  uncheckedColor="black" 
+                  color="#04ff30"
                   status={item.concluido ? 'checked' : 'unchecked'}
                   onPress={() => handleCheckboxToggle(item.id, item.concluido)}
                 />
@@ -50,7 +55,7 @@ const Outros = ({ navigation }) => {
         ))}
         <IconButton
           icon="plus"
-          style={styles.btnFab}
+          style={[styles.btnFab, { backgroundColor: theme.colors.secondary }]}
           onPress={() => navigation.navigate("AdicionarOutros")}
         />
       </ScrollView>
@@ -68,8 +73,8 @@ const styles = StyleSheet.create({
   },
   btnFab: {
     position: "absolute",
-    right: 0,
-    bottom: 0,
+    right: 15,
+    bottom: 20,
     margin: 16,
   },
   listItem: {

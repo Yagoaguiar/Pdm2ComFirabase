@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
-import { Appbar, List, IconButton, Checkbox } from "react-native-paper";
+import { Appbar, List, IconButton, Checkbox, useTheme, Colors } from "react-native-paper";
 import { ListaCompraContext } from "../contexts/ListaDeCompraContext";
+
 
 const Feira = ({ navigation }) => {
   const { itensDaFeira, excluirItem, marcarConcluido } = useContext(ListaCompraContext);
@@ -13,12 +14,12 @@ const Feira = ({ navigation }) => {
   const handleCheckboxToggle = (id, concluido) => {
     marcarConcluido(id, !concluido);
   };
-
+ const theme = useTheme();
   return (
     <View style={{ flex: 1 }}>
       <Appbar.Header>
-        <Appbar.Action icon="arrow-left" onPress={() => navigation.navigate("NovaHome")} />
-        <Appbar.Content title="Lista da Feira" />
+        <Appbar.Action icon="arrow-left" color={theme.colors.accent} onPress={() => navigation.navigate("NovaHome")} />
+        <Appbar.Content title="Lista da Feira" color={theme.colors.accent}/>
       </Appbar.Header>
       <ScrollView contentContainerStyle={styles.container}>
         {itensDaFeira.map((item) => (
@@ -29,6 +30,8 @@ const Feira = ({ navigation }) => {
             right={() => (
               <View style={styles.buttonsContainer}>
                 <Checkbox
+                  uncheckedColor="black" 
+                  color="#04ff30"
                   status={item.concluido ? 'checked' : 'unchecked'}
                   onPress={() => handleCheckboxToggle(item.id, item.concluido)}
                 />
@@ -44,8 +47,9 @@ const Feira = ({ navigation }) => {
           />
         ))}
         <IconButton
+          style={[styles.btnFab, { backgroundColor: theme.colors.secondary }]}
+          color={theme.colors.accent}
           icon="plus"
-          style={styles.btnFab}
           onPress={() => navigation.navigate("AdicionarFeira")}
         />
       </ScrollView>
@@ -63,8 +67,8 @@ const styles = StyleSheet.create({
   },
   btnFab: {
     position: "absolute",
-    right: 0,
-    bottom: 0,
+    right: 15,
+    bottom: 20,
     margin: 16,
   },
   listItem: {
