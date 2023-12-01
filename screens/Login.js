@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { View, ScrollView, StyleSheet } from "react-native";
-import { Button, Text, TextInput, HelperText } from "react-native-paper";
+import { Button, Text, TextInput, HelperText, useTheme } from "react-native-paper";
 import ListaCompraProvider from '../contexts/ListaDeCompraContext';
 import { AuthContext } from '../contexts/AuthContext';
 
@@ -9,6 +9,7 @@ const Login = ({ navigation }) => {
   const [senha, setSenha] = useState("");
   const { login, error } = useContext(AuthContext);
   
+  const { colors } = useTheme();
   return (
     <View style={styles.container}>
       <View style={styles.secondView}>
@@ -27,8 +28,7 @@ const Login = ({ navigation }) => {
           onChangeText={(text) => {
             setSenha(text);
           }} />
-
-        <Button mode="contained"
+        <Button mode="contained"r
           style={styles.Button}
           onPress={() => {
             login(email, senha);

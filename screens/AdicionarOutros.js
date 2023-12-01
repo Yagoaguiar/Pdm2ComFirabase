@@ -84,7 +84,7 @@ const AdicionarOutros = ({ navigation }) => {
           name="novaQuantidade"
           defaultValue=""
         />
-        <Button mode="contained" onPress={handleSubmit(onSubmit)}>
+        <Button style={styles.btn} mode="contained" onPress={handleSubmit(onSubmit)}>
           Adicionar
         </Button>
       </ScrollView>
@@ -98,6 +98,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 16,
   },
+  btn: {
+    marginTop: 12,
+  }
 });
 
 export default AdicionarOutros;
