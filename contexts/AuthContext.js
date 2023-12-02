@@ -1,7 +1,5 @@
-
-import { createContext, useState } from 'react';
-
-import { signIn, signUp } from '../services/AuthServices';
+import { createContext, useState } from "react";
+import { signIn, signUp } from "../services/AuthServices";
 
 const AuthContext = createContext();
 
