@@ -1,22 +1,45 @@
-import { useContext, useState } from 'react';
+import { useContext, useState } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
-import ListaCompraProvider from '../contexts/ListaDeCompraContext';
+
+import { AuthContext } from "../contexts/AuthContext";
 
 const Register = ({ navigation }) => {
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const { error, register } = useContext(AuthContext);
+
+
+  const handleLogin = () => {
+    navigation.navigate('Login');
+  };
+
+  const handleRegister = () => {
+    register(nome, email, senha);
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.secondView}>
         <Text style={styles.title}>Cadastre-se</Text>
-        <TextInput label="Nome" />
-        <TextInput label="Email" />
-        <TextInput label="Senha" secureTextEntry />
-        <Button
-          mode="contained"
-          style={styles.Button}
-          onPress={() => navigation.navigate("Home")}
-        >
+        <TextInput
+          label="Nome"
+          value={nome}
+          onChangeText={(text) => setNome(text)}
+        />
+        <TextInput
+          label="Email"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+        />
+        <TextInput
+          label="Senha"
+          secureTextEntry
+          value={senha}
+          onChangeText={(text) => setSenha(text)}
+        />
+        <Button mode="contained" style={styles.Button} onPress={handleRegister}>
           Registrar
         </Button>
         <Button
@@ -30,6 +53,7 @@ const Register = ({ navigation }) => {
     </View>
   );
 };
+
 export default Register;
 
 const styles = StyleSheet.create({

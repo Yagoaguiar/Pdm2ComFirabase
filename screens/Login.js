@@ -1,74 +1,59 @@
-import { useContext, useState } from 'react';
-import { View, ScrollView, StyleSheet } from "react-native";
-import { Button, Text, TextInput, HelperText, useTheme } from "react-native-paper";
-import ListaCompraProvider from '../contexts/ListaDeCompraContext';
-import { AuthContext } from '../contexts/AuthContext';
+import React, { useState, useContext } from "react";
+import { View, StyleSheet, Text } from "react-native";
+import { Button, TextInput } from "react-native-paper";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const { login, error } = useContext(AuthContext);
-  
-  const { colors } = useTheme();
+  const { error, login } = useContext(AuthContext);
+
+  const handleLogin = () => {
+    login(email, senha);
+  };
+
+  const handleRegister = () => {
+    navigation.navigate("Register");
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.secondView}>
-        <Text style={styles.title}>Login</Text>
-
-        <HelperText type="error" visible={true} style={styles.error}>{error}</HelperText>
-
-        <TextInput
-          label="Email"
-          onChangeText={(text) => {
-            setEmail(text);
-          }} />
-
-        <TextInput label="Senha"
-          secureTextEntry
-          onChangeText={(text) => {
-            setSenha(text);
-          }} />
-        <Button mode="contained"r
-          style={styles.Button}
-          onPress={() => {
-            login(email, senha);
-          }}>
-          Entrar
-        </Button>
-
-        <Button mode="contained" style={styles.Button}
-          onPress={() => navigation.navigate('Register')}>
-          Criar Conta
-        </Button>
-      </View>
+      <Text style={styles.error}>{error}</Text>
+      <TextInput
+        label="Email"
+        value={email}
+        onChangeText={(text) => setEmail(text)}
+      />
+      <TextInput
+        label="Senha"
+        secureTextEntry
+        value={senha}
+        onChangeText={(text) => setSenha(text)}
+      />
+      <Button mode="contained" style={styles.Button} onPress={handleLogin}>
+        Entrar
+      </Button>
+      <Button mode="contained" style={styles.Button} onPress={handleRegister}>
+        Criar Conta
+      </Button>
     </View>
   );
 };
-export default Login;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-  },
-  secondView: {
-    flex: 1,
     justifyContent: "center",
-  },
-  title: {
-    fontSize: 22,
-    padding: 8,
-    textAlign: "center",
-  },
-  label: {
-    color: "red",
   },
   Button: {
     marginTop: 15,
   },
   error: {
-    textAlign: 'center',
-    fontSize: 20,
-    marginBottom: 20
-  }
+    color: "red",
+    textAlign: "center",
+    marginBottom: 10,
+  },
 });
+
+export default Login;

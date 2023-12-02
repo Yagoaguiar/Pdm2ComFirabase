@@ -2,8 +2,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useContext } from "react";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
+import { AuthContext } from "../contexts/AuthContext";
 
-import Home from "../screens/Home";
 import EditarProduto from "../screens/Editar";
 import Login from "../screens/Login";
 import NovaCompra from "../screens/NovaCompra";
@@ -17,7 +17,6 @@ import AdicionarOutros from "../screens/AdicionarOutros";
 import Outros from "../screens/Outros";
 
 
-import { AuthContext } from "../contexts/AuthContext";
 
 const theme = {
   ...DefaultTheme,
@@ -36,13 +35,16 @@ const theme = {
 };
 
 const Stack = createNativeStackNavigator();
+
 const MainNavigator = () => {
-  const { user } = useContext(AuthContext);
+
+  const { usuario } = useContext(AuthContext);
+
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator>
-          {!user.logado ? (
+          {!usuario.logado ? (
             <>
               <Stack.Screen name="Login" component={Login} />
               <Stack.Screen name="Register" component={Register} options={{ title: 'Cadastre-se' }}/>
