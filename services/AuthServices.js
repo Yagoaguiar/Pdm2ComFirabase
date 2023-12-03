@@ -11,7 +11,7 @@ const signIn = async (email, password) => {
       password,
       returnSecureToken: true,
     });
-    await upDate(response.idToken, displayName);
+   // await upDate(response.data.idToken, displayName);
   } catch (error) {
     if (error.response.data.error.message === 'INVALID_LOGIN_CREDENTIALS') {
       throw Error('Usuario/Senha invalidos');

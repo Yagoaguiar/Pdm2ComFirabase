@@ -7,7 +7,7 @@ import { AuthContext } from "../contexts/AuthContext";
 const NovaHome = ({ navigation }) => {
   const { logout } = useContext(AuthContext);
   const theme = useTheme();
-  const usuarioNome = "Yago"
+
 
   const handleExit = () => {
     logout();
@@ -17,7 +17,7 @@ const NovaHome = ({ navigation }) => {
   return (
     <>
       <Appbar.Header>
-        <Appbar.Content title={`Bem-vindo ${usuarioNome}!`} color={theme.colors.accent} />
+        <Appbar.Content title={'Bem-vindo!'} color={theme.colors.accent} />
         <Appbar.Action icon="logout" onPress={handleExit} color={theme.colors.accent}/>
       </Appbar.Header>
       <List.Section>

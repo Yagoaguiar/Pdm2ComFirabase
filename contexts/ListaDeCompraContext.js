@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import BuyListService from '../services/BuyListService';
+import BuyListService from '../services/BuylistService';
 
 const ListaCompraContext = createContext();
 
@@ -122,3 +122,4 @@ const ListaCompraProvider = ({ children }) => {
 
 export default ListaCompraProvider;
 export { ListaCompraContext };
+
