@@ -11,7 +11,7 @@ const Mercado = ({ navigation }) => {
   };
 
   const handleCheckboxToggle = (id, concluido) => {
-    marcarConcluido(id, !concluido);
+    marcarConcluido(id);
   };
 
   return (

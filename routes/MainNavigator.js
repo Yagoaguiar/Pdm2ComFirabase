@@ -1,8 +1,9 @@
+import { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useContext } from "react";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-import { AuthContext } from "../contexts/AuthContext";
+
+import { AuthContext } from "../contexts/AuthContext";  
 
 import EditarProduto from "../screens/Editar";
 import Login from "../screens/Login";
@@ -16,28 +17,25 @@ import Feira from "../screens/Feira";
 import AdicionarOutros from "../screens/AdicionarOutros";
 import Outros from "../screens/Outros";
 
-
-
 const theme = {
   ...DefaultTheme,
   roundness: 2,
   colors: {
     ...DefaultTheme.colors,
     backgroud: "#c90076",
-    primary: "#FE9D1F", // principal 
+    primary: "#FE9D1F", // principal
     secondary: "#18d2ea", //azul, pastas e botões
     onBackground: "#f3f32",
     accent: "#ffff",
     danger: "#FA3415",
     tertiary: "#04ff30",
-    unchecked: "#00000"
+    unchecked: "#00000",
   },
 };
 
 const Stack = createNativeStackNavigator();
 
 const MainNavigator = () => {
-
   const { usuario } = useContext(AuthContext);
 
   return (
@@ -47,7 +45,11 @@ const MainNavigator = () => {
           {!usuario.logado ? (
             <>
               <Stack.Screen name="Login" component={Login} />
-              <Stack.Screen name="Register" component={Register} options={{ title: 'Cadastre-se' }}/>
+              <Stack.Screen
+                name="Register"
+                component={Register}
+                options={{ title: "Cadastre-se" }}
+              />
             </>
           ) : (
             <>

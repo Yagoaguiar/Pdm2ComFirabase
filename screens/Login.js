@@ -1,19 +1,21 @@
-import React, { useState, useContext } from "react";
+import { React, useState, useContext } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { Button, TextInput } from "react-native-paper";
+
 import { AuthContext } from "../contexts/AuthContext";
 
 const Login = ({ navigation }) => {
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
   const { error, login } = useContext(AuthContext);
+  
 
   const handleLogin = () => {
     login(email, senha);
   };
 
   const handleRegister = () => {
-    navigation.navigate("Register");
+    navigation.navigate('Register');
   };
 
   return (

@@ -8,9 +8,9 @@ const NovaHome = ({ navigation }) => {
   const { logout } = useContext(AuthContext);
   const theme = useTheme();
   const usuarioNome = "Yago"
-  const handleLogout = () => {
+
+  const handleExit = () => {
     logout();
-    navigation.navigate('login'); 
   };
 
   
@@ -18,7 +18,7 @@ const NovaHome = ({ navigation }) => {
     <>
       <Appbar.Header>
         <Appbar.Content title={`Bem-vindo ${usuarioNome}!`} color={theme.colors.accent} />
-        <Appbar.Action icon="logout" onPress={handleLogout} color={theme.colors.accent}/>
+        <Appbar.Action icon="logout" onPress={handleExit} color={theme.colors.accent}/>
       </Appbar.Header>
       <List.Section>
         <List.Subheader>Lista de Compra</List.Subheader>

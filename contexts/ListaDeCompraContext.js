@@ -1,62 +1,116 @@
-
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
+import BuyListService from '../services/BuyListService';
 
 const ListaCompraContext = createContext();
 
 const ListaCompraProvider = ({ children }) => {
   const [itens, setItens] = useState([]);
-  
+  const [itensDoMercado, setItensDoMercado] = useState([]);
+  const [itensDaFeira, setItensDaFeira] = useState([]);
+  const [itensOutros, setItensOutros] = useState([]);
 
-  const adicionarItem = (produto, quantidade, tipo) => {
-    const novoItem = {
-      id: Math.random().toString(36).substring(7),
-      produto,
-      quantidade,
-      tipo,
-      concluido: false,
+  useEffect(() => {
+    const carregarItens = async () => {
+      try {
+        const listaAtualizada = await BuyListService.listarTodos();
+        setItens(listaAtualizada);
+        const mercado = listaAtualizada.filter((item) => item.tipo === 'mercado');
+        setItensDoMercado(mercado);
+        const feira = listaAtualizada.filter((item) => item.tipo === 'feira');
+        setItensDaFeira(feira);
+        const outros = listaAtualizada.filter((item) => item.tipo === 'outros');
+        setItensOutros(outros);
+      } catch (error) {
+        console.log(error.message);
+      }
     };
-    setItens((prevItens) => [...prevItens, novoItem]);
-  };
-  const editarItem = (id, novoProduto, novaQuantidade) => {
-    setItens((prevItens) =>
-      prevItens.map((item) =>
-        item.id === id ? { ...item, produto: novoProduto, quantidade: novaQuantidade } : item
-      )
-    );
-  };
-  
-  const marcarConcluido = (id) => {
-    setItens((prevItens) =>
-      prevItens.map((item) =>
-        item.id === id ? { ...item, concluido: !item.concluido } : item
-      )
-    );
-  };
-  
-  const excluirItem = (id) => {
-    setItens((prevItens) =>
-      prevItens.filter((item) => item.id !== id)
-    );
-  };
-  
-  const buscar = (id) => {
-    return itens.find((item) => item.id === id);
+
+    carregarItens();
+  }, []);
+
+  const adicionarItem = async (produto, quantidade, tipo) => {
+    try {
+      await BuyListService.adicionarItem(produto, quantidade, tipo);
+      const listaAtualizada = await BuyListService.listarTodos();
+      setItens(listaAtualizada);
+      const mercado = listaAtualizada.filter((item) => item.tipo === 'mercado');
+      setItensDoMercado(mercado);
+      const feira = listaAtualizada.filter((item) => item.tipo === 'feira');
+      setItensDaFeira(feira);
+      const outros = listaAtualizada.filter((item) => item.tipo === 'outros');
+      setItensOutros(outros);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
-  const itensDoMercado = itens.filter(item => item.tipo === 'mercado');
-  const itensDaFeira = itens.filter(item => item.tipo === 'feira');
-  const itensOutros = itens.filter(item => item.tipo === 'outros');
+  const editarItem = async (id, novoProduto, novaQuantidade, novoTipo) => {
+    try {
+      await BuyListService.editarItem(id, novoProduto, novaQuantidade, novoTipo);
+      const listaAtualizada = await BuyListService.listarTodos();
+      setItens(listaAtualizada);
+      const mercado = listaAtualizada.filter((item) => item.tipo === 'mercado');
+      setItensDoMercado(mercado);
+      const feira = listaAtualizada.filter((item) => item.tipo === 'feira');
+      setItensDaFeira(feira);
+      const outros = listaAtualizada.filter((item) => item.tipo === 'outros');
+      setItensOutros(outros);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const excluirItem = async (id) => {
+    try {
+      await BuyListService.excluirItem(id);
+      const listaAtualizada = await BuyListService.listarTodos();
+      setItens(listaAtualizada);
+      const mercado = listaAtualizada.filter((item) => item.tipo === 'mercado');
+      setItensDoMercado(mercado);
+      const feira = listaAtualizada.filter((item) => item.tipo === 'feira');
+      setItensDaFeira(feira);
+      const outros = listaAtualizada.filter((item) => item.tipo === 'outros');
+      setItensOutros(outros);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const marcarConcluido = async (id) => {
+    try {
+      const itemIndex = itens.findIndex((item) => item.id === id);
+      if (itemIndex !== -1) {
+        const updatedItens = [...itens];
+        updatedItens[itemIndex] = {
+          ...updatedItens[itemIndex],
+          concluido: !updatedItens[itemIndex].concluido,
+        };
+  
+        setItens(updatedItens);
+  
+        const mercado = updatedItens.filter((item) => item.tipo === 'mercado');
+        setItensDoMercado(mercado);
+  
+        const feira = updatedItens.filter((item) => item.tipo === 'feira');
+        setItensDaFeira(feira);
+  
+        const outros = updatedItens.filter((item) => item.tipo === 'outros');
+        setItensOutros(outros);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const contextValue = {
     itens,
-    adicionarItem,
-    editarItem,
-    marcarConcluido,
-    excluirItem,
-    buscar,
     itensDoMercado,
     itensDaFeira,
-    itensOutros
+    itensOutros,
+    adicionarItem,
+    editarItem,
+    excluirItem,
+    marcarConcluido,
   };
 
   return (

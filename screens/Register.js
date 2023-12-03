@@ -19,6 +19,7 @@ const Register = ({ navigation }) => {
     register(nome, email, senha);
   };
 
+
   return (
     <View style={styles.container}>
       <View style={styles.secondView}>
@@ -45,7 +46,7 @@ const Register = ({ navigation }) => {
         <Button
           mode="contained"
           style={styles.Button}
-          onPress={() => navigation.navigate("Login")}
+          onPress={handleLogin}
         >
           Voltar
         </Button>
