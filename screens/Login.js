@@ -44,7 +44,6 @@ const Login = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 16,
     justifyContent: "center",
   },

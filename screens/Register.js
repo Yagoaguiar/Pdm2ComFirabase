@@ -22,8 +22,7 @@ const Register = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.secondView}>
-        <Text style={styles.title}>Cadastre-se</Text>
+      <ScrollView contentContainerStyle={styles.secondView}>
         <TextInput
           label="Nome"
           value={nome}
@@ -50,7 +49,7 @@ const Register = ({ navigation }) => {
         >
           Voltar
         </Button>
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -64,7 +63,6 @@ const styles = StyleSheet.create({
   },
   secondView: {
     flex: 1,
-    justifyContent: "center",
   },
   title: {
     fontSize: 22,
